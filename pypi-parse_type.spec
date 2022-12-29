@@ -4,7 +4,7 @@
 #
 Name     : pypi-parse_type
 Version  : 0.6.0
-Release  : 9
+Release  : 10
 URL      : https://files.pythonhosted.org/packages/d6/d4/8d79b78547df1c670406146776e1a91b1d5a1f5b928c0d7249e4fd1019bb/parse_type-0.6.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/d6/d4/8d79b78547df1c670406146776e1a91b1d5a1f5b928c0d7249e4fd1019bb/parse_type-0.6.0.tar.gz
 Summary  : Simplifies to build parse types based on the parse module
@@ -16,6 +16,9 @@ Requires: pypi-parse_type-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 BuildRequires : pypi(parse)
 BuildRequires : pypi(six)
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 ===============================================================================
@@ -63,15 +66,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656392907
+export SOURCE_DATE_EPOCH=1672297044
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
@@ -88,7 +91,7 @@ popd
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-parse_type
-cp %{_builddir}/parse_type-0.6.0/LICENSE %{buildroot}/usr/share/package-licenses/pypi-parse_type/6cd5ef4a9fc84461bee82c9674d9ba53d6baee52
+cp %{_builddir}/parse_type-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/pypi-parse_type/6cd5ef4a9fc84461bee82c9674d9ba53d6baee52 || :
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
