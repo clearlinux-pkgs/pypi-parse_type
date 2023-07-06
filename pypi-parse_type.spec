@@ -4,13 +4,14 @@
 # Using build pattern: pyproject
 #
 Name     : pypi-parse_type
-Version  : 0.6.1
-Release  : 12
-URL      : https://files.pythonhosted.org/packages/46/29/558531fda406a29d7a4a26d5c07a928aedb2bceea820c3c9f105dce39584/parse_type-0.6.1.tar.gz
-Source0  : https://files.pythonhosted.org/packages/46/29/558531fda406a29d7a4a26d5c07a928aedb2bceea820c3c9f105dce39584/parse_type-0.6.1.tar.gz
+Version  : 0.6.2
+Release  : 13
+URL      : https://files.pythonhosted.org/packages/47/32/416e1d54fae3150def1b2db06dca12c5c5be3d1f1ab75c93d5cb21b2b23c/parse_type-0.6.2.tar.gz
+Source0  : https://files.pythonhosted.org/packages/47/32/416e1d54fae3150def1b2db06dca12c5c5be3d1f1ab75c93d5cb21b2b23c/parse_type-0.6.2.tar.gz
 Summary  : Simplifies to build parse types based on the parse module
 Group    : Development/Tools
 License  : MIT
+Requires: pypi-parse_type-license = %{version}-%{release}
 Requires: pypi-parse_type-python = %{version}-%{release}
 Requires: pypi-parse_type-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
@@ -23,6 +24,14 @@ BuildRequires : pypi(setuptools)
 ===============================================================================
 parse_type
 ===============================================================================
+
+%package license
+Summary: license components for the pypi-parse_type package.
+Group: Default
+
+%description license
+license components for the pypi-parse_type package.
+
 
 %package python
 Summary: python components for the pypi-parse_type package.
@@ -46,10 +55,10 @@ python3 components for the pypi-parse_type package.
 
 
 %prep
-%setup -q -n parse_type-0.6.1
-cd %{_builddir}/parse_type-0.6.1
+%setup -q -n parse_type-0.6.2
+cd %{_builddir}/parse_type-0.6.2
 pushd ..
-cp -a parse_type-0.6.1 buildavx2
+cp -a parse_type-0.6.2 buildavx2
 popd
 
 %build
@@ -57,7 +66,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1688411223
+export SOURCE_DATE_EPOCH=1688658131
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -81,6 +90,8 @@ popd
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/pypi-parse_type
+cp %{_builddir}/parse_type-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/pypi-parse_type/416d87feed736c62723702f3a889a3fb44c03f62 || :
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -97,6 +108,10 @@ popd
 
 %files
 %defattr(-,root,root,-)
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/pypi-parse_type/416d87feed736c62723702f3a889a3fb44c03f62
 
 %files python
 %defattr(-,root,root,-)
