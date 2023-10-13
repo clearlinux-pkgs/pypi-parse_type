@@ -5,7 +5,7 @@
 #
 Name     : pypi-parse_type
 Version  : 0.6.2
-Release  : 13
+Release  : 14
 URL      : https://files.pythonhosted.org/packages/47/32/416e1d54fae3150def1b2db06dca12c5c5be3d1f1ab75c93d5cb21b2b23c/parse_type-0.6.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/47/32/416e1d54fae3150def1b2db06dca12c5c5be3d1f1ab75c93d5cb21b2b23c/parse_type-0.6.2.tar.gz
 Summary  : Simplifies to build parse types based on the parse module
