@@ -1,5 +1,5 @@
 PKG_NAME := pypi-parse_type
-URL = https://files.pythonhosted.org/packages/47/32/416e1d54fae3150def1b2db06dca12c5c5be3d1f1ab75c93d5cb21b2b23c/parse_type-0.6.2.tar.gz
+URL = https://files.pythonhosted.org/packages/ac/f4/176019f0f1aee502602d02bbe11a63211d7b031a42c0cd305a53765156c2/parse_type-0.6.3.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
